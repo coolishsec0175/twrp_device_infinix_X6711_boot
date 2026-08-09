@@ -1,0 +1,11 @@
+# Fstab
+ro.postinstall.fstab.prefix=/system
+
+# USB MTP
+ro.sys.usb.storage.type=mtp
+
+# Crypto
+ro.crypto.support_metadata_encrypt=true
+
+# Keymaster
+keymaster_ver=4.1
