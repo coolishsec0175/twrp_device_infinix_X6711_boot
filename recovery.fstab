@@ -1,13 +1,66 @@
 # Android File-System Tab
+# Generated from stock fstab.mt6833
 
-# Logical Partition
-system          /system         erofs       ro      wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
-system          /system         ext4        ro      wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
-vendor          /vendor         erofs       ro      wait,slotselect,avb,logical,first_stage_mount
-product         /product        erofs       ro      wait,slotselect,avb,logical,first_stage_mount
-system_ext      /system_ext     erofs       ro      wait,slotselect,avb,logical,first_stage_mount
+# Logical Partitions (first_stage_mount)
+/system         erofs     /dev/block/by-name/system       wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
+/vendor         erofs     /dev/block/by-name/vendor       wait,slotselect,avb,logical,first_stage_mount
+/product        erofs     /dev/block/by-name/product      wait,slotselect,avb,logical,first_stage_mount
+/system_ext     erofs     /dev/block/by-name/system_ext   wait,slotselect,avb,logical,first_stage_mount
 
-# Data Partition
-/dev/block/by-name/metadata         /metadata       ext4    noatime,nosuid,nodev,discard    wait,check,formattable,first_stage_mount
-/dev/block/by-name/userdata         /data           f2fs    noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt     wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
-/dev/block/by-name/misc             /misc           emmc    defaults    defaults
+# Metadata
+/metadata       ext4      /dev/block/by-name/metadata     wait,check,formattable,first_stage_mount
+
+# Data
+/data           f2fs      /dev/block/by-name/userdata     wait,check,formattable,quota,reservedsize=128m,latemount,resize,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
+
+# Transsion
+/tranfs         ext4      /dev/block/by-name/tranfs       wait,check,formattable,nofail,first_stage_mount
+
+# Vendor partitions
+/mnt/vendor/protect_f    ext4      /dev/block/by-name/protect1    wait,check,formattable
+/mnt/vendor/protect_s    ext4      /dev/block/by-name/protect2    wait,check,formattable
+/mnt/vendor/nvdata       ext4      /dev/block/by-name/nvdata      wait,check,formattable
+/mnt/vendor/nvcfg        ext4      /dev/block/by-name/nvcfg       wait,check,formattable
+/mnt/vendor/persist      ext4      /dev/block/by-name/persist     wait,check,formattable
+
+# External storage
+auto            auto      /devices/platform/mt_usb*        voldmanaged=usbotg:auto
+
+# EMMC partitions
+/persistent     emmc      /dev/block/by-name/frp           defaults
+/nvram          emmc      /dev/block/by-name/nvram         defaults
+/proinfo        emmc      /dev/block/by-name/proinfo       defaults
+/bootloader     emmc      /dev/block/by-name/lk            defaults
+/bootloader2    emmc      /dev/block/by-name/lk2           defaults
+/para           emmc      /dev/block/by-name/para          defaults
+/misc           emmc      /dev/block/by-name/misc          defaults
+/boot           emmc      /dev/block/by-name/boot          defaults,slotselect
+/vbmeta_vendor  emmc      /dev/block/by-name/vbmeta_vendor defaults,slotselect
+/vbmeta_system  emmc      /dev/block/by-name/vbmeta_system defaults,slotselect
+/logo           emmc      /dev/block/by-name/logo          defaults
+/expdb          emmc      /dev/block/by-name/expdb         defaults
+/seccfg         emmc      /dev/block/by-name/seccfg        defaults
+/tee1           emmc      /dev/block/by-name/tee1          defaults
+/tee2           emmc      /dev/block/by-name/tee2          defaults
+/scp1           emmc      /dev/block/by-name/scp1          defaults
+/scp2           emmc      /dev/block/by-name/scp2          defaults
+/sspm_1         emmc      /dev/block/by-name/sspm_1        defaults
+/sspm_2         emmc      /dev/block/by-name/sspm_2        defaults
+/dpm_1          emmc      /dev/block/by-name/dpm_1         defaults
+/dpm_2          emmc      /dev/block/by-name/dpm_2         defaults
+/mcupm_1        emmc      /dev/block/by-name/mcupm_1       defaults
+/mcupm_2        emmc      /dev/block/by-name/mcupm_2       defaults
+/md1img         emmc      /dev/block/by-name/md1img        defaults
+/md1dsp         emmc      /dev/block/by-name/md1dsp        defaults
+/md1arm7        emmc      /dev/block/by-name/md1arm7       defaults
+/md3img         emmc      /dev/block/by-name/md3img        defaults
+/gz1            emmc      /dev/block/by-name/gz1           defaults
+/gz2            emmc      /dev/block/by-name/gz2           defaults
+/spmfw          emmc      /dev/block/by-name/spmfw         defaults
+/pi_img         emmc      /dev/block/by-name/pi_img        defaults
+/boot_para      emmc      /dev/block/by-name/boot_para     defaults
+/odmdtbo        emmc      /dev/block/by-name/odmdtbo       defaults
+/dtbo           emmc      /dev/block/by-name/dtbo          defaults
+/otp            emmc      /dev/block/by-name/otp           defaults
+/vbmeta         emmc      /dev/block/by-name/vbmeta        defaults
+/tkv            emmc      /dev/block/by-name/tkv           defaults

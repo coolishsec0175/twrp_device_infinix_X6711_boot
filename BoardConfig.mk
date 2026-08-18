@@ -114,8 +114,6 @@ TARGET_USES_MKE2FS := true
 
 BOARD_SUPPRESS_SECURE_ERASE := true
 
-BOARD_RAMDISK_USE_LZMA := true
-LZMA_RAMDISK_TARGETS := boot
 RECOVERY_SDCARD_ON_DATA := true
 
 # Security patch level
@@ -152,11 +150,6 @@ TW_HAS_NO_RECOVERY_PARTITION := true
 # Tools
 TW_INCLUDE_LPTOOLS := true
 
-# Crypto
+# Crypto (minimal - trustonic services not included in init)
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
-TW_PREPARE_DATA_MEDIA_EARLY := true
-
-# Metadata
-BOARD_USES_METADATA_PARTITION := true
