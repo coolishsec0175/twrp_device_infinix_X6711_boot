@@ -127,8 +127,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
 
 # Ramdisk compression
-BOARD_RAMDISK_USE_LZMA := true
-LZMA_RAMDISK_TARGETS := boot
+BOARD_RAMDISK_USE_LZMA := false
 
 # Hack: prevent anti rollback
 # Encryption
