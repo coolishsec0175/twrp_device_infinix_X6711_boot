@@ -55,7 +55,7 @@ TARGET_SCREEN_DENSITY := 480
 # Kernel
 BOARD_BOOTIMG_HEADER_VERSION := 2
 BOARD_KERNEL_BASE := 0x40078000
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user androidboot.selinux=permissive buildvariant=eng
 
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_RAMDISK_OFFSET := 0x11088000
@@ -127,7 +127,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
 
 # Ramdisk compression
-BOARD_RAMDISK_USE_LZMA := false
+BOARD_RAMDISK_USE_LZMA := true
 
 # Hack: prevent anti rollback
 # Encryption
@@ -145,13 +145,15 @@ TARGET_RECOVERY_DEVICE_MODULES += \
     android.hardware.keymaster@4.1 \
     libkeymaster4 \
     libkeymaster41 \
-    libpuresoftkeymasterdevice
+    libpuresoftkeymasterdevice \
+    libSoftGatekeeper
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.keymaster@4.1 \
     $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster41.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
+    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libSoftGatekeeper.so
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -176,7 +178,6 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 # TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := false
-TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_NO_FASTBOOT_BOOT := true
@@ -185,10 +186,10 @@ TW_HAS_NO_RECOVERY_PARTITION := true
 TARGET_USES_MKE2FS := true
 
 TW_FRAMERATE := 60
+TW_SCREEN_BLANK_ON_BOOT := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
-TW_NO_SCREEN_BLANK := true
 
 # Excludes
 TW_EXCLUDE_TWRPAPP := true
